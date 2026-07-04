@@ -214,6 +214,3 @@ Test categories covered:
 
 ---
 
-## 🤖 AI Collaboration
-
-This repository was developed using pair-programming with the AI Coding Assistant. The structural decisions, architectural shifts, and collaboration notes are preserved in the [AI Collaboration Log](AI_LOG.md).
