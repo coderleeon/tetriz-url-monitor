@@ -51,3 +51,25 @@ This log documents our collaboration, architectural decisions, and key pivots du
    - *Message*: `feat(frontend): implement Next.js dashboard with auto-polling hooks and stats overview`
 4. **Commit 4 (Phase 5 - Docker)**:
    - *Message*: `feat(docker): add production Dockerfiles and docker-compose orchestration`
+## AI Limitations & Human Decisions
+
+### 1. SQLite URL Validation
+The AI initially suggested using Pydantic's `HttpUrl` type for URL validation. During implementation, I noticed that automatic normalization (such as adding trailing slashes) could interfere with uniqueness checks. I chose manual validation with explicit scheme checks instead to keep URL identity predictable.
+
+### 2. Scheduler Architecture
+The AI suggested separating the scheduler into its own service. For this assignment, I intentionally kept APScheduler inside the FastAPI application because it reduced operational complexity while satisfying all functional requirements.
+
+## Engineering Trade-offs
+
+To keep the project achievable within the assignment timeline while maintaining production quality, I intentionally chose:
+
+- SQLite instead of PostgreSQL
+- APScheduler instead of Celery/Redis
+- Polling instead of WebSockets
+- Docker Compose instead of Kubernetes
+
+These decisions prioritized simplicity, maintainability, and developer experience without sacrificing the assignment requirements.
+
+## Reflection
+
+AI significantly accelerated boilerplate generation, project scaffolding, and debugging. However, architectural decisions, technology selection, debugging runtime issues, Docker verification, and implementation trade-offs required manual reasoning and iterative validation. I treated AI as a senior pair programmer rather than a source of unquestioned code.
