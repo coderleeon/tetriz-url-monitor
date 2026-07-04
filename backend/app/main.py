@@ -13,6 +13,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
 from app.routers import monitors
 
+from app.scheduler import start_scheduler, shutdown_scheduler
+
 # Ensure the SQLite data directory exists
 os.makedirs("./data", exist_ok=True)
 
@@ -21,13 +23,13 @@ async def lifespan(app: FastAPI):
     # Startup: Create database tables (if they don't exist)
     Base.metadata.create_all(bind=engine)
     
-    # Placeholder for starting Scheduler (Phase 3)
-    # We will import and start it here.
+    # Start the periodic URL ping scheduler
+    start_scheduler()
     
     yield
     
-    # Shutdown: Cleanup scheduler
-    # We will import and shut it down here.
+    # Shutdown: Cleanup scheduler cleanly
+    shutdown_scheduler()
 
 app = FastAPI(
     title="URL Monitor API",
